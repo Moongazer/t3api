@@ -50,7 +50,7 @@ abstract class AbstractOperationHandler implements OperationHandlerInterface
         $this->validationService = $validationService;
     }
 
-    protected function getRepositoryForOperation(OperationInterface $operation): CommonRepository
+    protected function getRepositoryForOperation(OperationInterface $operation): \SourceBroker\T3api\Domain\Repository\ApiRepositoryInterface // TODO: manual edited
     {
         return CommonRepository::getInstanceForOperation($operation);
     }

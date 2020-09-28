@@ -25,7 +25,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  *
  * We do not extend \TYPO3\CMS\Extbase\Persistence\Repository because we don't want to use singleton interface
  */
-class CommonRepository
+class CommonRepository implements ApiRepositoryInterface
 {
     /**
      * @var OperationInterface
@@ -57,7 +57,7 @@ class CommonRepository
      *
      * @return CommonRepository
      */
-    public static function getInstanceForOperation(OperationInterface $operation): self
+    public static function getInstanceForOperation(OperationInterface $operation): ApiRepositoryInterface // TODO: manual edited
     {
         $repository = self::getInstanceForEntity($operation->getApiResource()->getEntity());
         $repository->operation = $operation;
@@ -84,12 +84,12 @@ class CommonRepository
      *
      * @return static
      */
-    public static function getInstanceForEntity(string $entity): self
+    public static function getInstanceForEntity(string $entity): ApiRepositoryInterface // TODO: manual edited
     {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         /** @var self $repository */
-        $repository = $objectManager->get(self::class);
+        $repository = $objectManager->get(static::class); // TODO: manual edited
         $repository->setObjectType($entity);
 
         return $repository;
